@@ -31,19 +31,18 @@ if check == 'y' or check == 'Y':
     watermark = input("Enter new watermark: ")
     watermark_color = input("Enter color: ")
 
-for pick in select_files():
+for pick in select_files(): #Get selected files, append to list
     file_list.append(pick)
 
 
 font = ImageFont.truetype("arial.ttf", 12)
-text_width, text_height = font.getsize(watermark)
+text_width, text_height = font.getsize(watermark) #determine size of watermark for placement
 
 for pic in file_list:
-    print(watermark)
-    this_pic = Image.open(pic)
-    pic_width = this_pic.width
-    pic_height = this_pic.height
-    draw = ImageDraw.Draw(this_pic)
+    this_pic = Image.open(pic) #set variable as opened image
+    pic_width = this_pic.width #detmine picture width
+    pic_height = this_pic.height #and height
+    draw = ImageDraw.Draw(this_pic) 
     draw.text((pic_width - text_width - 10, pic_height -
-               text_height - 5), watermark, font=font, fill=watermark_color)
-    this_pic.save(pic)
+               text_height - 5), watermark, font=font, fill=watermark_color) #draw text on bottom right, with some extra room for a buffer
+    this_pic.save(pic) #save over original image with watermark
